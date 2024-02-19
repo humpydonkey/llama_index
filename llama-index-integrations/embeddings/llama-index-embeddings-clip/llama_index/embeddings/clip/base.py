@@ -74,7 +74,6 @@ class ClipEmbedding(MultiModalEmbedding):
 
         try:
             import clip
-            import torch
         except ImportError:
             raise ImportError(
                 "ClipEmbedding requires `pip install git+https://github.com/openai/CLIP.git` and torch."
@@ -131,6 +130,7 @@ class ClipEmbedding(MultiModalEmbedding):
         return self._get_image_embedding(img_file_path)
 
     def _get_image_embedding(self, img_file_path: ImageType) -> Embedding:
+        import torch
         with torch.no_grad():
             image = (
                 self._preprocess(Image.open(img_file_path))
